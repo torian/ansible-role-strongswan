@@ -7,5 +7,6 @@
     name: "{{item}}"
     state: present
   with_items: "{{strongswan_packages}}"
+  register: _strongswan_pkgs
 
 # vi:ts=2:sw=2:et:ft=yaml
