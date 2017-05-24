@@ -8,7 +8,6 @@ An Ansible Role that installs and configures StrongSwan on Red Hat/CentOS or Deb
 
   * EL / Centos (7 / 6)
   * Ubuntu (Xenial / Trusty / Precise)
-  * Amazon Linux
 
 
 ## Role Variables
