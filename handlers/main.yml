@@ -1,0 +1,12 @@
+---
+
+- name: ipsec reload
+  command: >
+    {{strongswan_ipsec_bin}} reload
+
+- name: ipsec secrets reload
+  command: >
+    {{strongswan_ipsec_bin}} rereadsecrets
+
+
+# vi:ts=2:sw=2:et:ft=yaml
