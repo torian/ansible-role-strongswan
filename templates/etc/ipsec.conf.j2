@@ -3,18 +3,19 @@
 
 config setup
 {% for k,v in strongswan_config_setup.iteritems() %}
-	{{k}} = {{v}}
+	{{k}}={{v}}
 {% endfor %}
 
-config %default
+conn %default
 {% for k,v in strongswan_conn_default.iteritems() %}
-	{{k}} = {{v}}
+	{{k}}={{v}}
 {% endfor %}
 
 {% for conn,conn_settings in strongswan_conns.iteritems() %}
 conn {{conn}}
 {%   for k,v in conn_settings.iteritems() %}
-	{{k}} = {{v}}
+	{{k}}={{v}}
 {%   endfor %}
+
 {% endfor %}
 
