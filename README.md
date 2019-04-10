@@ -8,6 +8,8 @@ An Ansible Role that installs and configures StrongSwan on Red Hat/CentOS or Deb
 
   * EL / Centos (7 / 6)
   * Ubuntu (Xenial / Trusty / Precise)
+  * ArchLinux
+  * Alpine
 
 
 ## Role Variables
@@ -87,9 +89,9 @@ strongswan_secrets:
     credentials: cert.pem
 ```
 
-The double quotes inside the simple ones is meant to escape any special chars. 
+The double quotes inside the simple ones is meant to escape any special chars.
 
-`RSA` private keys (or any secret type that requires a key file) might be specified 
+`RSA` private keys (or any secret type that requires a key file) might be specified
 through `strongswan_private_keys` (TODO):
 
 ```

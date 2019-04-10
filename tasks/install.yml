@@ -1,6 +1,9 @@
 ---
 
-- include: "install/{{ansible_os_family}}.yml"
+- include: "{{item}}"
+  with_first_found:
+    - "install/{{ansible_os_family}}.yml"
+    - "install/default.yml"
 
 - name: Strongswan packages
   package:

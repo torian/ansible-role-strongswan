@@ -1,0 +1,9 @@
+---
+
+strongswan_packages:
+  - strongswan
+
+strongswan_prefix: /etc
+strongswan_ipsec_bin: /usr/bin/ipsec
+
+# vi:ts=2:sw=2:et:ft=yaml
