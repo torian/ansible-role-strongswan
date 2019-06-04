@@ -16,6 +16,7 @@
     owner: "root"
     group: "root"
     mode: "0640"
+  diff: no
   notify: ipsec secrets reload
 
 # vi:ts=2:sw=2:et:ft=yaml
