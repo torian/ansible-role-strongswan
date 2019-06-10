@@ -6,7 +6,6 @@ strongswan_secrets_file: "{{strongswan_prefix}}/ipsec.secrets"
 
 strongswan_config_setup:
   uniqueids: 'yes'
-  charonstart: 'yes'
   charondebug: ''
 
 # strongswan_conn_default: Defaults for connections
