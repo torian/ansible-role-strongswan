@@ -1,20 +1,20 @@
 # << Ansible managed file >>
-# {{strongswan_config_file}} - strongSwan IPsec configuration file
+# {{ strongswan_config_file }} - strongSwan IPsec configuration file
 
 config setup
-{% for k,v in strongswan_config_setup|dict2items %}
-	{{k}}={{v}}
+{% for param in strongswan_config_setup|dict2items %}
+	{{ param.key }}={{ param.value }}
 {% endfor %}
 
 conn %default
-{% for k,v in strongswan_conn_default|dict2items %}
-	{{k}}={{v}}
+{% for param in strongswan_conn_default|dict2items %}
+	{{ param.key }}={{ param.value }}
 {% endfor %}
 
-{% for conn,conn_settings in strongswan_conns|dict2items %}
-conn {{conn}}
-{%   for k,v in conn_settings|dict2items %}
-	{{k}}={{v}}
+{% for conn in strongswan_conns|dict2items %}
+conn {{ conn.key }}
+{%   for param in conn.value|dict2items %}
+	{{ param.key }}={{ param.value }}
 {%   endfor %}
 
 {% endfor %}
