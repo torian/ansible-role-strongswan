@@ -9,8 +9,8 @@
         uniqueids: yes
         charondebug: 'ike 2, knl 3, cfg 0'
     - strongswan_conn_default:
-        left: "{{ansible_default_ipv4.address}}"
-        leftsourceip: "{{ansible_default_ipv4.address}}"
+        left: "{{ ansible_default_ipv4.address }}"
+        leftsourceip: "{{ ansible_default_ipv4.address }}"
         leftsubnet: 10.0.0.0/16
         type: tunnel
         keyexchange: ikev2
@@ -22,7 +22,7 @@
           esp: aes256-sha1-modp1024
           auto: route
     - strongswan_secrets:
-        - left: "{{ansible_default_ipv4.address}}"
+        - left: "{{ ansible_default_ipv4.address }}"
           right: 1.2.3.4
           type: PSK
           credentials: '"super wooper dooper secret"'
