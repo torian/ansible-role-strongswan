@@ -3,7 +3,7 @@
 - name: Strongswan ipsec.conf
   template:
     src: etc/ipsec.conf.j2
-    dest: "{{strongswan_config_file}}"
+    dest: "{{ strongswan_config_file }}"
     owner: "root"
     group: "root"
     mode: "0644"
@@ -12,7 +12,7 @@
 - name: Strongswan ipsec.secrets
   template:
     src: etc/ipsec.secrets.j2
-    dest: "{{strongswan_secrets_file}}"
+    dest: "{{ strongswan_secrets_file }}"
     owner: "root"
     group: "root"
     mode: "0640"

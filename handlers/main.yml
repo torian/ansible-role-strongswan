@@ -2,12 +2,12 @@
 
 - name: ipsec reload
   command: >
-    {{strongswan_ipsec_bin}} reload
+    {{ strongswan_ipsec_bin }} reload
   when: not (_strongswan_pkgs|changed)
 
 - name: ipsec secrets reload
   command: >
-    {{strongswan_ipsec_bin}} rereadsecrets
+    {{ strongswan_ipsec_bin }} rereadsecrets
   when: not (_strongswan_pkgs|changed)
 
 

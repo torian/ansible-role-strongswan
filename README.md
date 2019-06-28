@@ -26,7 +26,6 @@ The `ipsec.conf` file is configured through the following vars (and their defaul
 ```
 strongswan_config_setup:
   uniqueids: yes
-  charonstart: yes
   charondebug: ''
 
 strongswan_conn_default: {}

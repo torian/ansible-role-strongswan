@@ -2,7 +2,7 @@
 
 - name: EPEL Repository (RedHat)
   yum:
-    name: "{{strongswan_epel_url}}"
+    name: "{{ strongswan_epel_url }}"
     state: present
 
 # vi:ts=2:sw=2:et:ft=yaml
