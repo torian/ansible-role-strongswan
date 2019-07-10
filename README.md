@@ -90,16 +90,22 @@ strongswan_secrets:
 The double quotes inside the simple ones is meant to escape any special chars. 
 
 `RSA` private keys (or any secret type that requires a key file) might be specified 
-through `strongswan_private_keys` (TODO):
+through `strongswan_private_keys`:
 
 ```
 strongswan_private_keys:
+  - filename: key.pem
+    file: key.pem # can be a file in ./files, encrypted in vault
+```
+
+
+Certificates can be specified through `strongswan_certificates`:
+
+```
+strongswan_certificates:
   - filename: cert.pem
-    key: |
-      --- begin your key ---
-      --- end your key ---
-  - filename: more_secure.pem
-    key: "{{var_from_a_vault}}"
+    file: cert.pem 
+    type: certs or cacerts
 ```
 
 ## License

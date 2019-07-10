@@ -1,0 +1,20 @@
+
+- name: copy certificates
+  copy:
+    src: "{{ item.file }}"
+    dest: "/etc/ipsec.d/{{ item.type }}/{{ item.filename }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  with_items: "{{ strongswan_certificates }}"
+  notify: ipsec reload
+
+- name: copy private keys
+  copy:
+    src: "{{ item.file }}"
+    dest: "/etc/ipsec.d/private/{{ item.filename }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  with_items: "{{ strongswan_keys }}"
+  notify: ipsec reload

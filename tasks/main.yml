@@ -7,6 +7,9 @@
 - include: install.yml
   tags: strongswan_install
 
+- include: certs.yml
+  tags: strongswan_certs
+
 - include: config.yml
   tags: strongswan_config
 
