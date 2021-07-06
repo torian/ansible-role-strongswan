@@ -51,4 +51,15 @@ strongswan_conns: {}
 
 strongswan_secrets: []
 
+# strongswan_updown: Dict to specify interface parameters for updown script.
+# Disabled by default.
+#
+#   strongswan_updown:
+#     out_int: 'eth0'              # leftid
+#     vti_int: 'vti100'            # Virtual Tunnel Interface
+#     vti_local: '192.168.0.5/31'  # leftsourceip
+#     vti_nexthop: '192.168.0.4'   # rightsourceip
+
+strongswan_updown: {}
+
 # vi:ts=2:sw=2:et:ft=yaml
