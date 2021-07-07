@@ -24,7 +24,8 @@ case "${PLUTO_VERB}" in
         $IP addr add ${VTI_LOCAL} remote ${VTI_REMOTE} dev "${VTI_IF}"
         $IP link set ${VTI_IF} up mtu 1436
         sysctl -w net.ipv4.conf.${VTI_IF}.disable_policy=1
-        sysctl -w net.ipv4.conf.${VTI_IF}.rp_filter=2 || sysctl -w net.ipv4.conf.${VTI_IF}.rp_filter=0
+        sysctl -w net.ipv4.conf.${VTI_IF}.rp_filter=0
+        sysctl -w net.ipv4.conf.${VTI_IF}.send_redirects=0
         $IPTABLES -t mangle -I FORWARD -o ${VTI_IF} -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
         $IPTABLES -t mangle -I INPUT -p esp -s ${PLUTO_PEER} -d ${PLUTO_ME} -j MARK --set-xmark ${PLUTO_MARK_IN}
         $IP route add 10.0.0.0/8 via $VTI_NEXTHOP
@@ -47,3 +48,5 @@ esac
 sysctl -w net.ipv4.ip_forward=1
 sysctl -w net.ipv4.conf.$INT.disable_xfrm=1
 sysctl -w net.ipv4.conf.$INT.disable_policy=1
+sysctl -w net.ipv4.conf.$INT.send_redirects=0
+sysctl -w net.ipv4.conf.$INT.rp_filter=0

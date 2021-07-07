@@ -1,3 +1,41 @@
 ---
 
+- name: check if ipsec cmd exists
+  command: which ipsec
+  changed_when: false
+  failed_when: false
+  register: strongswan_installed
+
+- name: installation
+  block:
+  - name: prerequisite packages
+    apt:
+      name: [gcc, libgmp3-dev, make]
+      state: present
+      update_cache: yes
+
+  - name: get strongswan tarball
+    unarchive:
+      src: 'https://download.strongswan.org/strongswan-{{ strongswan_version }}.tar.bz2'
+      dest: /tmp
+      remote_src: yes
+
+  - name: run configure script
+    command: ./configure --prefix=/usr --sysconfdir=/etc
+    args:
+      chdir: '/tmp/strongswan-{{ strongswan_version }}'
+    become: true
+
+  - name: build default target
+    make:
+      chdir: '/tmp/strongswan-{{ strongswan_version }}'
+
+  - name: run 'install' target
+    make:
+      chdir: '/tmp/strongswan-{{ strongswan_version }}'
+      target: install
+    become: true
+    notify: ipsec restart
+  when: strongswan_installed.rc != 0
+
 # vi:ts=2:sw=2:et:ft=yaml

@@ -1,8 +1,8 @@
 ---
 
-- name: ipsec reload
+- name: ipsec restart
   command: >
-    {{strongswan_ipsec_bin}} reload
+    {{strongswan_ipsec_bin}} restart
 
 - name: ipsec secrets reload
   command: >

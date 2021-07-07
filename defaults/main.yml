@@ -1,13 +1,13 @@
 ---
-
+strongswan_version: "5.8.2"
 strongswan_config_file:  "{{strongswan_prefix}}/ipsec.conf"
-
 strongswan_secrets_file: "{{strongswan_prefix}}/ipsec.secrets"
+charon_filelog: "/var/log/charon.log"
 
 strongswan_config_setup:
+  charondebug: 'dmn 2, mgr 2, ike 2, chd 2, job 2, cfg 2, knl 2, net 2, enc 2 lib 2'
   uniqueids: 'yes'
-  charonstart: 'yes'
-  charondebug: ''
+  strictcrlpolicy: 'no'
 
 # strongswan_conn_default: Defaults for connections
 #  This will populate the default conn (%default)
