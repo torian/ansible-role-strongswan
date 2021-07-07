@@ -32,7 +32,7 @@ strongswan_conn_default: {}
 #       ike: aes256-sha1-modp1024
 #       esp: aes256-sha1-modp1024
 #       auto: start
-#
+#       leftupdown=/etc/strongswan/updown.sh
 strongswan_conns: {}
 
 # strongswan_secrets: List of secrets to define
@@ -55,9 +55,9 @@ strongswan_secrets: []
 # Disabled by default.
 #
 #   strongswan_updown:
-#     out_int: 'eth0'              # leftid
+#     out_int: 'eth0'              # public interface
 #     vti_int: 'vti100'            # Virtual Tunnel Interface
-#     vti_local: '192.168.0.5/31'  # leftsourceip
+#     vti_local: '192.168.0.5/31'  # leftsourceip/mask
 #     vti_nexthop: '192.168.0.4'   # rightsourceip
 
 strongswan_updown: {}
