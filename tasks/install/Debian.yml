@@ -21,7 +21,9 @@
       remote_src: yes
 
   - name: run configure script
-    command: ./configure --prefix=/usr --sysconfdir=/etc
+    command: >
+      ./configure --prefix=/usr --sysconfdir=/etc
+      {{ strongswan_configure_extra_args }}
     args:
       chdir: '/tmp/strongswan-{{ strongswan_version }}'
     become: true

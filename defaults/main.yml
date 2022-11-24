@@ -2,6 +2,7 @@
 strongswan_version: "5.8.2"
 strongswan_config_file:  "{{strongswan_prefix}}/ipsec.conf"
 strongswan_secrets_file: "{{strongswan_prefix}}/ipsec.secrets"
+strongswan_configure_extra_args: "--enable-systemd --enable-swanctl"
 charon_filelog: "/var/log/charon.log"
 
 strongswan_config_setup:
