@@ -1,8 +1,5 @@
 ---
 
-strongswan_packages:
-  - strongswan
-
 strongswan_prefix: /etc
 
 strongswan_ipsec_bin: /usr/sbin/ipsec

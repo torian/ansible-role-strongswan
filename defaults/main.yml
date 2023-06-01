@@ -1,13 +1,14 @@
 ---
-
+strongswan_version: "5.8.2"
 strongswan_config_file:  "{{strongswan_prefix}}/ipsec.conf"
-
 strongswan_secrets_file: "{{strongswan_prefix}}/ipsec.secrets"
+strongswan_configure_extra_args: "--enable-systemd --enable-swanctl"
+charon_filelog: "/var/log/charon.log"
 
 strongswan_config_setup:
+  charondebug: 'dmn 2, mgr 2, ike 2, chd 2, job 2, cfg 2, knl 2, net 2, enc 2 lib 2'
   uniqueids: 'yes'
-  charonstart: 'yes'
-  charondebug: ''
+  strictcrlpolicy: 'no'
 
 # strongswan_conn_default: Defaults for connections
 #  This will populate the default conn (%default)
@@ -32,7 +33,7 @@ strongswan_conn_default: {}
 #       ike: aes256-sha1-modp1024
 #       esp: aes256-sha1-modp1024
 #       auto: start
-#
+#       leftupdown=/etc/strongswan/updown.sh
 strongswan_conns: {}
 
 # strongswan_secrets: List of secrets to define
@@ -50,5 +51,16 @@ strongswan_conns: {}
 #
 
 strongswan_secrets: []
+
+# strongswan_updown: Dict to specify interface parameters for updown script.
+# Disabled by default.
+#
+#   strongswan_updown:
+#     out_int: 'eth0'              # public interface
+#     vti_int: 'vti100'            # Virtual Tunnel Interface
+#     vti_local: '192.168.0.5/31'  # leftsourceip/mask
+#     vti_nexthop: '192.168.0.4'   # rightsourceip
+
+strongswan_updown: {}
 
 # vi:ts=2:sw=2:et:ft=yaml

@@ -1,14 +1,11 @@
 ---
 
-- name: ipsec reload
+- name: ipsec restart
   command: >
-    {{strongswan_ipsec_bin}} reload
-  when: not (_strongswan_pkgs|changed)
+    {{strongswan_ipsec_bin}} restart
 
 - name: ipsec secrets reload
   command: >
     {{strongswan_ipsec_bin}} rereadsecrets
-  when: not (_strongswan_pkgs|changed)
-
 
 # vi:ts=2:sw=2:et:ft=yaml

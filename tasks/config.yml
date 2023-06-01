@@ -1,5 +1,19 @@
 ---
 
+- name: sysctl tweaks
+  sysctl:
+    name: '{{ item.name }}'
+    value: '{{ item.value }}'
+    sysctl_set: true
+    state: present
+    reload: true
+  loop:
+    - {name: 'net.ipv4.ip_forward', value: '1'}
+    - {name: 'net.ipv4.conf.all.rp_filter', value: '0'}
+    - {name: 'net.ipv4.conf.default.rp_filter', value: '0'}
+    - {name: 'net.ipv4.conf.all.send_redirects', value: '0'}
+    - {name: 'net.ipv4.conf.default.send_redirects', value: '0'}
+
 - name: Strongswan ipsec.conf
   template:
     src: etc/ipsec.conf.j2
@@ -7,7 +21,7 @@
     owner: "root"
     group: "root"
     mode: "0644"
-  notify: ipsec reload
+  notify: ipsec restart
 
 - name: Strongswan ipsec.secrets
   template:
@@ -17,5 +31,38 @@
     group: "root"
     mode: "0640"
   notify: ipsec secrets reload
+
+- name: Strongswan updown script
+  block:
+    - name: create strongswan directory
+      file:
+        path: "{{strongswan_prefix}}/strongswan"
+        state: directory
+        recurse: yes
+        owner: "root"
+        group: "root"
+
+    - name: add updown script
+      template:
+        src: strongswan/updown.sh.j2
+        dest: "{{ strongswan_prefix }}/strongswan/updown.sh"
+        owner: "root"
+        group: "root"
+        mode: "0755"
+      notify: ipsec restart
+  when: strongswan_updown is defined and strongswan_updown.keys()|length > 0
+
+- name: setup logfile
+  template:
+    src: strongswan/charon-logging.conf.j2
+    dest: /etc/strongswan.d/charon-logging.conf
+  notify: ipsec restart
+
+- name: disable routes installing by charon
+  replace:
+    path: /etc/strongswan.d/charon.conf
+    regexp: '^.*install_routes.*yes|^.*#.*install_routes.*'
+    replace: 'install_routes = no'
+  notify: ipsec restart
 
 # vi:ts=2:sw=2:et:ft=yaml

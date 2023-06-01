@@ -1,0 +1,18 @@
+{{ ansible_managed | comment }}
+charon {
+    filelog {
+        charon_log {
+            append = no
+            default = 2
+            flush_line = yes
+            ike_name = yes
+            path = {{ charon_filelog }}
+            time_add_ms = yes
+            time_format = %b %e %T
+        }
+    }
+
+    syslog {
+    }
+}
+

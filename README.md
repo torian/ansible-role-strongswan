@@ -7,7 +7,15 @@ An Ansible Role that installs and configures StrongSwan on Red Hat/CentOS or Deb
 ## Tested On
 
   * EL / Centos (7 / 6)
-  * Ubuntu (Xenial / Trusty / Precise)
+  * Ubuntu (Focal / Xenial / Trusty / Precise)
+
+
+### Debian Strongswan Versions
+When installing Strongswan on the Debian-based distros, a `strongswan_version` var may be used. 
+
+Available versions: https://download.strongswan.org/.
+> **5.8.2** used as default in this role. 
+
 
 
 ## Role Variables
@@ -25,9 +33,9 @@ The `ipsec.conf` file is configured through the following vars (and their defaul
 
 ```
 strongswan_config_setup:
-  uniqueids: yes
-  charonstart: yes
-  charondebug: ''
+  charondebug: 'dmn 2, mgr 2, ike 2, chd 2, job 2, cfg 2, knl 2, net 2, enc 2 lib 2'
+  uniqueids: 'yes'
+  strictcrlpolicy: 'no'
 
 strongswan_conn_default: {}
 
@@ -42,6 +50,26 @@ element might contain the following attributes:
   type:       Optional (defaults to PSK) - any valid secret type
   credential: Required - Connection's credentials
 ```
+
+An updown script can be used to specify interface parameters of the VTI interface:
+```
+   strongswan_updown:
+     out_int: 'eth0'                # public interface
+     vti_int: 'vti100'              # Virtual Tunnel Interface
+     vti_local: '192.168.0.5/31'    # leftsourceip/mask
+     vti_nexthop: '192.168.0.4'     # rightsourceip
+```
+Script path is `{{ strongswan_prefix }}`/strongswan/updown.sh. Should be referenced under `strongswan_conns`:
+> leftupdown=/etc/strongswan/updown.sh
+
+Disabled by default.
+
+
+#### Logging
+Default logfile is */var/log/charon.log*.
+
+Can be changed by overwriting `charon_filelog` value. 
+
 
 ## Usage
 

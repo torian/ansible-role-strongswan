@@ -1,20 +1,22 @@
-# << Ansible managed file >>
+{{ ansible_managed | comment }}
 # {{strongswan_config_file}} - strongSwan IPsec configuration file
 
 config setup
-{% for k,v in strongswan_config_setup.items() %}
-	{{k}}={{v}}
-{% endfor %}
+  charondebug="{{ strongswan_config_setup.charondebug }}"
+  uniqueids={{ strongswan_config_setup.uniqueids }}
+  strictcrlpolicy={{ strongswan_config_setup.strictcrlpolicy }}
 
+{% if strongswan_conn_default is defined and strongswan_conn_default != {} %}
 conn %default
-{% for k,v in strongswan_conn_default.items() %}
-	{{k}}={{v}}
-{% endfor %}
+{%   for k,v in strongswan_conn_default.items() %}
+  {{k}}={{v}}
+{%   endfor %}
+{% endif %}
 
 {% for conn,conn_settings in strongswan_conns.items() %}
 conn {{conn}}
-{%   for k,v in conn_settings.items() %}
-	{{k}}={{v}}
+{%   for k,v in conn_settings.items()|sort(attribute='0') %}
+  {{k}}={{v}}
 {%   endfor %}
 
 {% endfor %}
